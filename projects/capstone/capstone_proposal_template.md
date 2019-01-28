@@ -2,6 +2,8 @@
 ## Capstone Proposal
 Joe Udacity  
 December 31st, 2050
+Sitansh Rajput
+January 10th, 2019
 
 ## Proposal
 _(approx. 2-3 pages)_
@@ -11,10 +13,16 @@ _(approx. 1-2 paragraphs)_
 
 In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. Additionally, a discussion of your personal motivation for investigating a particular problem in the domain is encouraged but not required.
 
+Humpback whales are of particular interest to many marine bioligists around the world right now. After decades and centuries of being intenstly hunted for their meat and fat, humpback popluations have fallen dramatically and are having a hard time recovering due to climate change. Climate change has created changes in whale migration, movement, and hunting as the increase in ocean temperature has caused their prey to move as well. Being able to automatically detect whales from their tales can give environment scientists and marine coservationists a lot of insight as to how to best further protect the whale populations.
+
+I took on this project because ...
+
 ### Problem Statement
 _(approx. 1 paragraph)_
 
 In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
+
+The problem here is that we have a massive amount of images of whales breaching (and showing off their tails) provided by both tourists and scientists that right now are being manually identified by individual scientists. This is not a scalable way to track the location of whales across the globe. Thus, we need a way of identifying whales through their tails by a program. The goal would then to be able to identify individual whales from pictures of their tails as whale tales contan very unique patterns and markings. 
 
 ### Datasets and Inputs
 _(approx. 2-3 paragraphs)_
