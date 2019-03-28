@@ -14,6 +14,8 @@ Increasing accessibility and education is an important goal within the STEM fiel
 
 I tookon this project because it seemed like a very interesting, and applicable topic with pragmatic, real-world uses. 
 
+There seems to be some academic work related specifically to hand signs and many weekend projects over this, though many focus not on ASL but more directions and more universal gestures. I've cited one specific example.
+
 https://pdfs.semanticscholar.org/eb2d/466f0c44509dde2893460473e1d6725e9e92.pdf
 
 ### Problem Statement
