@@ -17,9 +17,9 @@ Grayscale" fontcolor=white]
 	subgraph cluster_1 {
 		color="#5faad0" style=filled
 		conv_2 [label="Convolutional Layer
-Kernel Size: 4x4
-Filters: 64" shape=square]
-		2 [label="64
+Kernel Size: 3x3
+Filters: 32" shape=square]
+		2 [label="32
 Feature Maps" shape=square]
 	}
 	subgraph cluster_output {
