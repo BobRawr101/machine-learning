@@ -19,6 +19,8 @@ We will do this by first examining the data we have, and to look for errors in t
 
 Accuracy is generally an extremely efficent and easy to calculate score that is a good indicator of performance. However, it can be prone to error and easy to skew, so we must make sure the data is even across classes in training and testing. However, as will be shown later in the report, the data used for both training and testing are relatively balanced across the classes, so the metric to measure performance for the model will be accuracy. 
 
+The equation for accuracy is: $\frac{numRight}{totalNum}$ or $\frac{TP + TN}{TP + TN + FP + FN}$ where T and F stand for True and False respectively, and P and N stand for Positive and Negative respectively.	
+
 ## II. Analysis
 
 ### Data Exploration
@@ -71,6 +73,28 @@ The benchmark will be a publically available kernel on Kaggle. It creates a rela
 
 There was no need to pre-process the data to clean it out as there were no outliers, missing features and all classes were evenly distributed through the data. However, in order to make the model more robust and less prone to overfitting the data, I used an ImageGenerator that would alter the brightness, rotate, skew, and shift the images. This generator is used during the fitting process, and provides live alterations to the images.
 
+This is where we create the generator.
+```python
+train_datagen = ImageDataGenerator(shear_range = 0.25,                           
+                                   zoom_range = 0.15,
+                                   rotation_range = 15,
+                                   brightness_range = [0.15, 1.15],
+                                   width_shift_range = [-2,-1, 0, +1, +2],
+                                   height_shift_range = [ -1, 0, +1],
+                                   fill_mode = 'reflect')
+```
+
+We then fit this generator to our training data so it knows what operations to do during the training process.
+```python
+train_datagen.fit(x_train)
+```
+
+Finally, we train the model. Instead of using the typical model.fit, we use a model.fit_generator so it knows to expect live altering of images. 
+```python
+history = model.fit_generator(train_datagen.flow(x_train, y_train, batch_size=batch_size), 
+                              validation_data = (x_valid, y_valid), epochs=epochs)
+```
+
 ### Implementation
 
 !['Model'](data/model.png)
@@ -86,13 +110,19 @@ https://arxiv.org/pdf/1606.02228.pdf
 
 A lot of refinement was done to achieve a consistent accuracy of >99%. A lot of fitting was done using a wide array of filters, kernel sizes, padding, and dropout rates, they were initially based off of the paper, but adjustments were made per the results of the training process. 
 
+Some typical points of refinement were the chaning of the filter size between the three Convolutional Layers. I started using very large sizes such 4x4, and 5x5, but this created a very shallow network and was unable to look at very specific features. So I decided to use three layers of 3x3 filter sizes.
+
+Anothing very helpful point of refinement was my pooling algorithm and paramaters. My initial proposal was to use a AveragePool of 3x3. However, once I read the previously cited research paper, in addition to many more Quora posts and Medium articles, I decided on using MaxPooling, and decided to minimize the overlap between the results and set the stride count to 2. This was very helpful in increasing my training accuracy and delivering a much more consistent score. 
+
 ## IV. Results
 
 ### Model Evaluation and Validation
 
 The model is definitely aligning with the expectations for the solution. I did not go beyond testing the model with the original altered images, but there is no reason to not assume that the model would not work just as well with similar images but of differnt sign languages seeing as it is able to not overfit on specific patterns. 
 
-Since I used an ImageDataGenerator, changes to the training data or input space do not affect the results to a major effect, if at all. 
+With the the above shown ImageDataGenerator, changes to the training data or input space do not affect the results to a major effect, if at all. This is since the generator itself creates changes to the data like brightness, skew, shift, and more, because of this the model accounts for changes in the data. 
+
+Finally, the testing set is ~7500 of 28x28 grayscale images, the classes are balanced across the dataset and as we got ~95%+ on our training accuracies, >99% validation scores, and >99% testing scores across a multitude of tests, the model has proved its trustworthiness. 
 
 ### Justification
 
